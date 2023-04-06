@@ -22,4 +22,4 @@
 
 * <mark>EMCO Compact 5 CNC</mark>
 
-![](C:\Users\mehme\Desktop\EMCO.jpeg)
+![](EMCO.jpeg)
