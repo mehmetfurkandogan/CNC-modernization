@@ -10,20 +10,21 @@
 
 ## Meeting Notes
 
-- EMCO Compact CNC Torna arka paneli söküldü, bazı parçaların yenilenmiş olduğu fark edildi. 
+* EMCO Compact CNC Torna arka paneli söküldü.
   
-  - Step motor sürücüsü değiştirilmiş.
-  
-  - Ön panelde sonradan eklenen bölümler mevcut
-  
-  - Spindle kontrolcüsü ve Güç kartı orijinal 
+  <img title="" src="IMG-20230413-WA0012.jpg" alt="" data-align="inline">
 
-- EMCO Compact CNC Torna arka paneli söküldü, bazı parçaların yenilenmiş olduğu fark edildi. 
+* Bazı parçaların yenilenmiş olduğu fark edildi. 
   
-  - Step motor sürücüsü değiştirilmiş.
+  * Step motor sürücüsü değiştirilmiş.
+    
+    <img title="" src="IMG-20230413-WA0016.jpg" alt="" width="385" data-align="inline">
   
-  - Ön panelde sonradan eklenen bölümler mevcut
+  * Ön panelde sonradan eklenen bölümler mevcut
+    
+    <img src="IMG-20230413-WA0015.jpg" title="" alt="" width="388">
   
-  - Spindle kontrolcüsü ve Güç kartı orijinal 
-
-
+  * Spindle kontrolcüsü ve Güç kartı orijinal
+    
+    <img src="IMG-20230413-WA0014.jpg" title="" alt="" width="333"><img src="IMG-20230413-WA0009.jpg" title="" alt="" width="332">
+- 
