@@ -6,4 +6,8 @@ Date: 20.04.2023
 
 # 2 black wires are removed (16-5 ; 17-6)
 
-<img title="" src="WhatsApp Image 2023-04-20 at 13.09.05.jpg" alt="" width="330"><img title="" src="file:///C:/Users/Egemen/Documents/GitHub/CNC-modernization/CNC%20Lathe%20Inspection%20Report/WhatsApp%20Image%202023-04-20%20at%2013.09.06.jpg" alt="" width="187">
+<img title="" src="WhatsApp Image 2023-04-20 at 13.09.05.jpg" alt="" width="330"><img title="" src="WhatsApp Image 2023-04-20 at 13.09.06.jpg" alt="" width="187">
+
+---
+
+# 
