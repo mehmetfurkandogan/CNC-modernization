@@ -31,5 +31,3 @@ gantt
     Testing & Calibration: test, after mech,10.06.23
     Final Presentation:    crit,milestone,final,10.06.23,1d
 ```
-
-
