@@ -38,7 +38,7 @@ There is a 3 axis TB6560 driver board on the lathe right now.
 
 <img title="" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" height="20"> [winder](https://github.com/winder)/[**Universal-G-Code-Sender**](https://github.com/winder/Universal-G-Code-Sender) [UGS](https://winder.github.io/ugs_website/) to create g-codes
 
-<img title="" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" height="20"> [grbl](https://github.com/grbl)/**[grbl](https://github.com/grbl/grbl)** can be used with arduino
+<img title="" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" height="20"> [gnea](https://github.com/gnea)/**[grbl](https://github.com/gnea/grbl)**  can be used with arduino
 
 <img title="" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" height="20"> [picatostas](https://github.com/picatostas)/**[cnc_interface](https://github.com/picatostas/cnc_interface)** can be used for ROS integration
 
