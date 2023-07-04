@@ -1,8 +1,8 @@
 // Define the digital pin for output
-const int outputPin = 4;
-int step_pulse_time = 100;
-int step_idle_delay = 25;
-int number_of_pulses = 100;
+const int outputPin = 2;
+int step_pulse_time = 1000;
+int pulse_delay = 100;
+int number_of_pulses = 150;
 
 void setup() {
   // Initialize serial communication
@@ -25,7 +25,7 @@ void loop() {
         digitalWrite(outputPin, HIGH);  // Set the output pin HIGH
         delayMicroseconds(step_pulse_time);
         digitalWrite(outputPin, LOW);   // Set the output pin LOW
-        delay(step_idle_delay);
+        delay(pulse_delay);
       }
     }
   }
