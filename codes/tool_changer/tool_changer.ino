@@ -1,6 +1,6 @@
-#define PWM1 3
-#define AIN1 4
-#define AIN2 5
+#define PWM1 9
+#define AIN1 10
+#define AIN2 11
 
 int motor_speed;
 bool motor_direction;
