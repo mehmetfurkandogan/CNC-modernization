@@ -22,7 +22,7 @@ Two steppers motors are used for controlling the X and Z axis. Those motors are 
 
 ### Motor Info - Warner Electric Brake & Clutch sm-072-0060-ra
 
-![z-step-specs.jpeg](Documents\z-step-specs.jpeg)
+![z-step-specs.jpeg](/Documents/z-step-specs.jpeg)
 
 | Date Submitted     | Nov 03, 1999                   |
 | ------------------ | ------------------------------ |
@@ -58,7 +58,7 @@ Two steppers motors are used for controlling the X and Z axis. Those motors are 
 
 Motor connections is made using the unipolar configuration.
 
-![stepper_motor_diagram.png](Documents\stepper_motor_diagram.png)
+![stepper_motor_diagram.png](/Documents/stepper_motor_diagram.png)
 
 ### Programming
 
