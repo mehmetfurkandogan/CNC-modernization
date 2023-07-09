@@ -3,9 +3,11 @@ const int outputPin_x = 2;
 const int directionPin_x = 5;
 const int outputPin_z = 4;
 const int directionPin_z = 7;
-int step_pulse_time = 1000;
-int pulse_delay = 100;
-int number_of_pulses = 20;
+const bool direction_x = 0;
+const bool direction_z = 1;
+int step_pulse_time = 255;
+int pulse_delay = 5;
+int number_of_pulses = 100;
 
 void setup() {
   // Initialize serial communication
@@ -17,11 +19,10 @@ void setup() {
   pinMode(outputPin_z, OUTPUT);
   pinMode(directionPin_z, OUTPUT);
 
-  // Set initial state to LOW
   digitalWrite(outputPin_x, LOW);
-  digitalWrite(directionPin_x, HIGH);
+  digitalWrite(directionPin_x, direction_x);
   digitalWrite(outputPin_z, LOW);
-  digitalWrite(directionPin_z, HIGH);
+  digitalWrite(directionPin_z, direction_z);
 }
 
 void loop() {
@@ -30,7 +31,7 @@ void loop() {
 
     // Check the received character
     if (receivedChar == 'X' || receivedChar == 'x') {
-      digitalWrite(directionPin_x, HIGH);
+      digitalWrite(directionPin_x, direction_x);
       for (int i = 0 ; i < number_of_pulses; i++) {
         digitalWrite(outputPin_x, HIGH);  // Set the output pin HIGH
         delayMicroseconds(step_pulse_time);
@@ -41,7 +42,7 @@ void loop() {
     }
 
     else if (receivedChar == 'Z' || receivedChar == 'z') {
-      digitalWrite(directionPin_z, HIGH);
+      digitalWrite(directionPin_z, direction_z);
       for (int i = 0 ; i < number_of_pulses; i++) {
         digitalWrite(outputPin_z, HIGH);  // Set the output pin HIGH
         delayMicroseconds(step_pulse_time);
