@@ -5,48 +5,31 @@
 int motor_speed;
 bool motor_direction;
 bool tool_change = false;
-int incomingNumber;
+// int incomingNumber;
 unsigned long startTime;
 bool cw = false;
 bool ccw = false;
 int Tool = 1;
-int start_time = 0;
+
+int high_start_time = 0;
 bool flag = false;
+int desired_tool = 0;
+int duration = 0;
 
 void IRS() {
-  start_time = milis();
+  high_start_time = millis();
   flag = true;
 }
 
-void setup() {
-  attachInterrupt(digitalPinToInterrupt(3), IRS, RISING);
-
-  Serial.begin(9600);
-  pinMode(PWM1, OUTPUT);
-  pinMode(AIN1, OUTPUT);
-  pinMode(AIN2, OUTPUT);
-  motor_speed = 255;
-  motor_direction = false;
-
-}
-
-void loop() {
-
-
-
-
-
-  if (Serial.available() > 0) {
-    incomingNumber = Serial.parseInt();
-    incomingNumber = ((incomingNumber - Tool) % 6 + 6) % 6;
-    // Serial.println(incomingNumber);
-    if (incomingNumber && tool_change == false) {
-      tool_change = true;
-      cw = true;
-      ccw = false;
-      motor_direction = true;
-      startTime = millis();
-    }
+void change_tool(int incomingNumber) {
+  incomingNumber = ((incomingNumber - Tool) % 6 + 6) % 6;
+  // Serial.println(incomingNumber);
+  if (incomingNumber && tool_change == false) {
+    tool_change = true;
+    cw = true;
+    ccw = false;
+    motor_direction = true;
+    startTime = millis();
   }
   if (millis() - startTime >= 2000 && tool_change && cw) {
     cw = false;
@@ -73,14 +56,36 @@ void loop() {
   }
 
   if (motor_direction) {
-    digitalWrite(AIN1, HIGH); //Motor A Rotate Clockwise
+    digitalWrite(AIN1, HIGH);  //Motor A Rotate Clockwise
     digitalWrite(AIN2, LOW);
-  }
-  else {
-    digitalWrite(AIN1, LOW); //Motor A Rotate CounterClockwise
+  } else {
+    digitalWrite(AIN1, LOW);  //Motor A Rotate CounterClockwise
     digitalWrite(AIN2, HIGH);
   }
 
-  analogWrite(PWM1, motor_speed); //Speed control of Motor A
+  analogWrite(PWM1, motor_speed);  //Speed control of Motor A
+}
 
+void setup() {
+  attachInterrupt(digitalPinToInterrupt(3), IRS, RISING);
+
+  Serial.begin(9600);
+  pinMode(PWM1, OUTPUT);
+  pinMode(AIN1, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  motor_speed = 255;
+  motor_direction = false;
+}
+
+
+
+void loop() {
+  if(flag && (digitalRead(3)==LOW)){
+    duration = millis() - high_start_time;
+    flag = false;
+    desired_tool = duration / 100;
+  }
+  //change_tool(desired_tool);
+  Serial.write(desired_tool);
+  delay(5);
 }
