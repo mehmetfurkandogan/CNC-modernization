@@ -64,8 +64,6 @@ Motor connections is made using the unipolar configuration.
 
 To program the CNC lathe, an Arduino related software GRBL is used. The g-code can be sent directly through the serial port to the Arduino. Universal Gcode Sender is another way to send g-code to Arduino easily.
 
-
-
 ## Controlling the Speed of the Spindle
 
 ---
@@ -76,16 +74,26 @@ In the spindle assembly, there is a disc that has 100 holes equidistant form ori
 
 Arduino board is used for this application. The main idea is to count the number of holes during a specific time interval. This time interval is formed using a timer interrupt and is adjusted to a second in this application. During operation, the hole count per second, which is also equal to revolution of the spindle per second (rps), is calculated. With proper unit conversions, rotational speed of the spindle in revolutions per minute (rpm) is found and published via a display screen.
 
-
-
 ### Driving the Spindle Motor
 
 The spindle motor has 180 VDC nominal voltage rate. As this is not a voltage rate that is generally used; to satisfy this need, the grid voltage is chosen to be used. An AC  dimmer and a full bridge rectifier is used to drive the spindle motor. The speed of the motor can be controlled by using the potentiometer of the dimmer. The speed can be controlled closed loop by rotating the potentiometer using a servo motor. In this system, the measured spindle speed is used as the feedback of the control loop.
-
-
 
 ## Automatic Tool Changing
 
 ---
 
 There is a 12 V DC motor and a rachet mechanism inside the gearbox to control the tool changer. Since there is no sensor in this system, the motor is controlled open loop using a seperate Arduino board. The desired tool number is sent to that Arduino through serial port to change the tool.
+
+
+
+# Possible Improvements
+
+## Stepper Motors
+
+
+
+## X axis Limitation
+
+
+
+## GRBL Limitations
