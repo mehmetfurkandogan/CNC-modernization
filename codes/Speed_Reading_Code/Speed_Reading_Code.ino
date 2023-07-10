@@ -23,7 +23,7 @@ void setup()
 
   sei(); //Enable Interrupts
 
-  attachInterrupt(digitalPinToInterrupt(QRD1114_PIN), hizokuma, CHANGE); // External Interrupt
+  attachInterrupt(digitalPinToInterrupt(QRD1114_PIN), hizokuma, RISING); // External Interrupt
 }
 
 void hizokuma() {
