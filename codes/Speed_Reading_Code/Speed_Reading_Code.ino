@@ -1,13 +1,13 @@
-#define QRD1114_PIN  2 // Sensor output voltage
-float hiz = 0;
-int arachiz = 0;
+#define QRD1114_PIN  2 // Sensor Pin
+float holes = 0; // Interrupt variable, Number of holes count in a time interval (specified with Interrupt Frequency)
+int spindle_speed = 0; // Spindle Speed in rpm
 
 void setup()
 {
   Serial.begin(9600);
   pinMode(QRD1114_PIN, INPUT);
 
-  //TIMER INTERRUPT
+  //TIMER INTERRUPT SETTINGS
   cli(); //Stop Interrupts
 
   TCCR1A = 0;
@@ -23,21 +23,23 @@ void setup()
 
   sei(); //Enable Interrupts
 
-  attachInterrupt(digitalPinToInterrupt(QRD1114_PIN), hizokuma, RISING); // External Interrupt
+  attachInterrupt(digitalPinToInterrupt(QRD1114_PIN), hole_count, RISING); // External Interrupt
 }
 
-void hizokuma() {
-  hiz++;
+// Interrupt function for counting the holes
+void hole_count() {
+  holes++;
 }
 
+// Timer Interrupt
 ISR(TIMER1_COMPA_vect){
-     arachiz = hiz/100*60; //Teker devri, rpm
-     hiz = 0;
+     spindle_speed = holes/100*60; // Spindle Speed, rpm
+     holes = 0;
 }
 
 void loop()
 {
-  Serial.println(arachiz);
+  Serial.println(spindle_speed);
 }
 
 
