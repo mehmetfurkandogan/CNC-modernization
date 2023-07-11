@@ -13,7 +13,7 @@ int Tool = 1;
 
 int high_start_time = 0;
 bool flag = false;
-int desired_tool = 0;
+int desired_tool = 1;
 int duration = 0;
 
 void IRS() {
@@ -21,8 +21,8 @@ void IRS() {
   flag = true;
 }
 
-void change_tool(int incomingNumber) {
-  incomingNumber = ((incomingNumber - Tool) % 6 + 6) % 6;
+void change_tool(int inputNumber) {
+  int incomingNumber = ((inputNumber - Tool) % 6 + 6) % 6;
   // Serial.println(incomingNumber);
   if (incomingNumber && tool_change == false) {
     tool_change = true;
@@ -43,8 +43,8 @@ void change_tool(int incomingNumber) {
     motor_direction = true;
     incomingNumber -= 1;
     Tool = (Tool + 1) % 6;
-    Serial.print("Tool Number:");
-    Serial.println(Tool);
+    //    Serial.print("Tool Number:");
+    //    Serial.println(Tool);
     if (incomingNumber == 0) {
       tool_change = false;
       motor_direction = false;
@@ -67,6 +67,11 @@ void change_tool(int incomingNumber) {
 }
 
 void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(5000);
+  digitalWrite(LED_BUILTIN, LOW);
+  
   attachInterrupt(digitalPinToInterrupt(3), IRS, RISING);
 
   Serial.begin(9600);
@@ -80,12 +85,17 @@ void setup() {
 
 
 void loop() {
-  if(flag && (digitalRead(3)==LOW)){
+
+  if (flag && (digitalRead(3) == LOW)) {
     duration = millis() - high_start_time;
     flag = false;
     desired_tool = duration / 100;
+
   }
-  //change_tool(desired_tool);
-  Serial.write(desired_tool);
-  delay(5);
+  //Serial.print("duration:");
+  //Serial.print(duration);
+  change_tool(desired_tool);
+  //Serial.print(" desired_tool:");
+  //Serial.println(desired_tool * 100 + 50);
+  delay(1);
 }
