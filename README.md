@@ -2,17 +2,41 @@
 
 *ME462 Mechatronic Design Project by group Despacito*
 
+The objective of this project is to revive an old cnc lathe (Emco Compact 5 CNC).
+
 <u>Group Members:</u> Egemen İlikmen, Yalın Şahin, Mehmet Furkan Doğan
 
-## Objective
+![FrontView.jpeg](/Pictures/FrontView.jpeg)
 
-The objective of this project is to revive an old cnc lathe (Emco Compact 5 CNC). There are three parts of this project:
+## Using Emco Compact 5 CNC
 
-1. Controlling the X and Z axes
+## Powering the Lathe
 
-2. Controlling the Speed of the Spindle
+The lathe should be plugged in to 220V AC through the power cable at the back. The electric plug can be used to power other things after the machine is plugged in. (That plug is not connected to any fuse or emergency stop button) To give power to the electronics inside of the lathe, the emergency stop button should be deactivated.
 
-3. Automatic Tool Changing
+After that, there are two requirements to activate the PSU that powers everything.
+
+* Make sure that there is a casette tape inside and the lid is closed
+
+* The switch with a key is at the on position
+
+After that the lathe should be powered on.
+
+## Using the Lathe
+
+ There are three parts of this project:
+
+1. **Controlling the X and Z axes**
+   
+   The g-code can be sent through the serial with a baud rate of 115200 using the usb cable at the back. The settings of grbl can be seen using '##' command. For more information about grbl: [grbl Wiki](https://github.com/gnea/grbl/wiki)
+
+2. **Controlling the Speed of the Spindle**
+   
+   The speed cannot be controlled but it can be masured using a beam breaker encoder. [Speed_Reading_Code](/codes/Speed_Reading_Code/Speed_Reading_Code.ino) can be uploaded to the arduino on top to get speed readings in rpm through the serial port with a baud rate of 9600.
+
+3. **Automatic Tool Changing**
+   
+   [tool_changer](/codes/tool_changer/tool_changer.ino) can be uploaded to the arduino on top to control the tool changer. The tool number should be sent through the serial port with a baud rate of 9600 to use the desired tool. Remember that the tools are changed incrementally. Therefore, the 1st tool must be selected before end of the operation.
 
 ## Controlling the X and Z axis
 
@@ -62,9 +86,7 @@ Motor connections is made using the unipolar configuration.
 
 ### Programming
 
-To program the CNC lathe, an Arduino related software GRBL is used. The g-code can be sent directly through the serial port to the Arduino. Universal Gcode Sender is another way to send g-code to Arduino easily.
-
-
+To program the CNC lathe, an Arduino related software [GRBL](https://github.com/gnea/grbl) is used. The g-code can be sent directly through the serial port to the Arduino. Universal Gcode Sender is another way to send g-code to Arduino easily.
 
 ## Controlling the Speed of the Spindle
 
@@ -80,21 +102,17 @@ Arduino board is used for this application. The main idea is to count the number
 
 The spindle motor has 180 VDC nominal voltage rate. As this is a high voltage rate supplying necessary voltage to the motor is challenging. To change and regulate the AC power coming from the grid, an AC  dimmer and a full bridge rectifier is planned to be used. The speed can be controlled closed loop by rotating the potentiometer using a servo motor. In this system, the measured spindle speed is aimed to be used as the feedback of the control loop.
 
-
-
 ## Automatic Tool Changing
 
 ---
 
 There is a 12 V DC motor and a rachet mechanism inside the gearbox to control the tool changer. Since there is no sensor in this system, the motor is controlled open loop using a seperate Arduino board. The desired tool number is sent to that Arduino through serial port to change the tool.
 
+## Electrical Scheme & Wiring
 
+---
 
-
-
-# Electrical Scheme & Wiring
-
-## Electrical Sub-System
+### Electrical Sub-System
 
 After preparing the sub-systems of the lathe, the electrical system is designed to distribute the required power to every component. The general scheme is shared below:
 
@@ -104,11 +122,7 @@ For safety measures, an emergency stop button is connected to the main power lin
 
 Secondly, a fuse is equipped to the electrical system, after the emergency stop button and the power distribution terminal. Considering the power need of the lathe, 8A rated fuse is selected.
 
-
-
 A fan is used in the system to cool the electrical components. It is powered by 220VAC, so it is connected to the main line, after the fuse.
-
-
 
 Apart from the emergency stop button, two serial connected switches are present also. For the machine to work fully, the key switch must be turned on and a casette should be in its box. If both switches are off, the AC power reaches to the power supply and converted to DC. From its different output wires, 12V voltage is transferred to the buck converters and regulated to 9V, which is the rated voltage of the stepper motors and the drivers. At last, the output of the converter is connected to the drivers and after that to the stepper motors.
 
@@ -116,15 +130,13 @@ The power supply is taken from an old computer and its specifications are shared
 
  (specifications of the power supply)
 
-
-
 The two controller boards (Arduino Uno) are powered differently. The below one, the main board which is controlling the axes, is powered from the computer via a cable. And the above one, which is used to control the tool changer and measure speed control, is fed from the main arduino, from Vin pin.
 
-# Wiring
+## Wiring
 
 The connections of the lathe with its electronic components is shown with a picture and tabulated below:
 
-(Arka kısmın fotosu)
+![(Arka kısmın fotosu)](/Pictures/RearView_Open2.jpeg)
 
 | From | To  | Number |
 |:----:|:---:| ------ |
@@ -132,14 +144,6 @@ The connections of the lathe with its electronic components is shown with a pict
 |      |     |        |
 |      |     |        |
 |      |     |        |
-
-
-
-
-
-
-
-
 
 # Possible Improvements
 
@@ -154,3 +158,25 @@ For the motor drive, an industrial motor driver may be selected and used, for a 
 ## X axis Limitation
 
 ## GRBL Limitations
+
+GRBL is a tool that is designed for a wide range of CNC applications from laser cutters to routers. However, due to the limitations of the hardware (Arduino Uno in that case), GRBL is not very good at all of the applications that it seems to support. The biggest problem we had encounter while using GRBL was the lack of tool changer support. Here are the possible solutions to that problem:
+
+* **(The one that we tried) Using the abandoned features of GRBL to make tool changer work**
+  
+  Coolant control pin can be used to send a signal for changing the tool. In order that to work, the original g-code can be manipulated before being sent to GRBL so that the tool changing commands (*T# and M06*) is replaced with coolant control and pause commands (M08, M09 and G04 P#).
+
+* **Using a GRBL alternative that has tool changer support**
+  
+  Possible candidates are:
+  
+  * [µCNC](https://github.com/Paciente8159/uCNC)
+  
+  * [grblHAL driver for RP2040 (Pi Pico)](https://github.com/grblHAL/RP2040)
+  
+  * [LinuxCNC](http://linuxcnc.org/)
+
+* **Coding a GRBL alternative or modifying GRBL to just have what we need and nothing more**
+
+## Tool Changer Limitations
+
+The toolchanger works incrementally right now. Therefore it should be resetted manually after every uses. There is a light line on the side of the tool holder. An optic encoder can be used to reset the tool position automatically.
