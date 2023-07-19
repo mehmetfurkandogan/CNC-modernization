@@ -155,7 +155,11 @@ For the motor drive, an industrial motor driver may be selected and used, for a 
 
 ## Stepper Motors
 
+We are using the stepper motors in unipolar configuration at their rated voltage. This results in double the current draw which in turn doubles the power consumption heating the motor. We suggest replacing the stepper motors with ones that can be driven in bipolar configuration.
+
 ## X axis Limitation
+
+There is a sheet metal part that prevents chips from falling to the lead screw of the x-axis. However, this part is bent and limits the movement of the X axis towards the negative X direction. This part can be fixed or replaced to further improve the performance of the lathe.
 
 ## GRBL Limitations
 
