@@ -86,7 +86,9 @@ Motor connections is made using the unipolar configuration.
 
 ### Programming
 
-To program the CNC lathe, an Arduino related software [GRBL](https://github.com/gnea/grbl) is used. The g-code can be sent directly through the serial port to the Arduino. Universal Gcode Sender is another way to send g-code to Arduino easily.
+To program the CNC lathe, an Arduino related software [GRBL](https://github.com/gnea/grbl) is used. The g-code can be sent directly through the serial port to the Arduino. [Universal Gcode Sender](https://github.com/winder/Universal-G-Code-Sender) is another way to send g-code to Arduino easily.
+
+Here is another GCode sender for GRBL: [svenhb/GRBL-Plotter](https://github.com/svenhb/GRBL-Plotter)
 
 ## Controlling the Speed of the Spindle
 
